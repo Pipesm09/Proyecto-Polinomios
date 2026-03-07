@@ -54,7 +54,8 @@ public class Forma1 {
             Va[exp + 1] = coe;
             VPF1 = Va;
         } else {
-            VPF1[exp + 1] = VPF1[exp + 1] + coe;
+            int indice = VPF1[0] - exp + 1;
+            VPF1[indice] += coe;
         }
     }
 
@@ -117,42 +118,86 @@ public class Forma1 {
 
     public static void SumarPoli(Forma1 vector1, Forma1 vector2) {
 
-    int gradoSuma = Math.max(vector1.VPF1[0], vector2.VPF1[0]);
+        int gradoSuma = Math.max(vector1.VPF1[0], vector2.VPF1[0]);
 
-    Forma1 VecSuma = new Forma1(gradoSuma);
+        Forma1 VecSuma = new Forma1(gradoSuma);
 
-    int i;
-    int coef1;
-    int coef2;
-    int suma;
-    int exp;
+        int i;
+        int coef1;
+        int coef2;
+        int suma;
+        int exp;
 
-    for (i = 1; i <= gradoSuma + 1; i++) {
+        for (i = 1; i <= gradoSuma + 1; i++) {
 
-        coef1 = 0;
-        coef2 = 0;
+            coef1 = 0;
+            coef2 = 0;
 
-        if (i < vector1.VPF1.length) {
-            coef1 = vector1.VPF1[i];
+            if (i < vector1.VPF1.length) {
+                coef1 = vector1.VPF1[i];
+            }
+
+            if (i < vector2.VPF1.length) {
+                coef2 = vector2.VPF1[i];
+            }
+
+            suma = coef1 + coef2;
+
+            exp = gradoSuma - (i - 1);
+
+            VecSuma.Insertar(suma, exp);
         }
 
-        if (i < vector2.VPF1.length) {
-            coef2 = vector2.VPF1[i];
-        }
+        System.out.println("La suma de los polinomios es:");
 
-        suma = coef1 + coef2;
-
-        exp = gradoSuma - (i - 1);
-
-        VecSuma.Insertar(suma, exp);
-    }
-
-    System.out.println("La suma de los polinomios es:");
-
-    System.out.println("\n");
+        System.out.println("\n");
         for (i = 0; i < VecSuma.VPF1.length; i++) {
             System.out.print("[" + VecSuma.VPF1[i] + "]");
         }
         System.out.println("\n");
-}
+    }
+
+    public static void MultiplicarPoli(Forma1 vector1, Forma1 vector2) {
+
+        int gradoResultado = vector1.VPF1[0] + vector2.VPF1[0];
+        Forma1 VecRes = new Forma1(gradoResultado);
+
+        for (int i = 1; i < vector1.VPF1.length; i++) {
+
+            int coef1 = vector1.VPF1[i];
+            int exp1 = vector1.VPF1[0] - (i - 1);
+
+            for (int j = 1; j < vector2.VPF1.length; j++) {
+
+                int coef2 = vector2.VPF1[j];
+                int exp2 = vector2.VPF1[0] - (j - 1);
+
+                int coefRes = coef1 * coef2;
+                int expRes = exp1 + exp2;
+
+                VecRes.Insertar(coefRes, expRes);
+            }
+        }
+
+        System.out.println("\n");
+        for (int i = 0; i < VecRes.VPF1.length; i++) {
+            System.out.print("[" + VecRes.VPF1[i] + "]");
+        }
+        System.out.println("\n");
+    }
+
+    public double evaluar(double x) {
+
+        double resultado = 0;
+
+        for (int i = 1; i < VPF1.length; i++) {
+
+            int coef = VPF1[i];
+            int exp = VPF1[0] - (i - 1);
+
+            resultado += coef * Math.pow(x, exp);
+        }
+
+        return resultado;
+    }
 }
