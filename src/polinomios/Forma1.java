@@ -115,6 +115,51 @@ public class Forma1 {
         }
 
     }
+    public String ReconstruirPoli() {
+        if (VPF1 == null) return "El vector es NULO (vacío)";
+
+        int grado = VPF1[0];        
+        String resultado = "";
+        boolean esPrimerTermino = true;
+        for (int k = grado; k >= 0; k--) {
+            int pos = k + 1;
+            
+            // Si la posición se sale del vector, avisamos
+            if (pos >= VPF1.length) {
+                System.out.println("SALTANDO pos " + pos + " (fuera de rango)");
+                continue; 
+            }
+
+            int coe = VPF1[pos];
+            if (coe != 0) {
+                if (esPrimerTermino) {
+                    if (coe < 0) resultado += "-";
+                } else {
+                    if (coe > 0) resultado += " + ";
+                    else resultado += " - ";
+                }
+                int valor =coe;
+                if(valor<0){
+                    valor=-valor;
+                }
+                if (valor !=1 || k == 0) {
+                    resultado += valor;
+                }
+                if (k > 0) {
+                    resultado += "x";
+                }
+                if (k > 1) {
+                    resultado += "^" + k;
+                }
+                esPrimerTermino = false;
+            }
+        }
+
+        System.out.println(resultado);
+        
+        if (resultado.equals("")) return "0";
+        return resultado;
+    }
 
     public static void SumarPoli(Forma1 vector1, Forma1 vector2) {
 

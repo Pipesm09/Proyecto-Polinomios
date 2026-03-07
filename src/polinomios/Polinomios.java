@@ -1,5 +1,6 @@
 package polinomios;
 
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +14,7 @@ public class Polinomios {
      */
     public static void main(String[] args) {//-10+8x^2-3x^5+2x 4x^2+5x^3-20
         int opt = 0;
+        Scanner sc = new Scanner(System.in);
         Forma1 F1;
         String vs[] = CrearPoli();
         F1 = new Forma1(Integer.parseInt(vs[1]));
@@ -32,17 +34,26 @@ public class Polinomios {
         do {
             opt = menu();
             switch (opt) {
-                case 1:
-                    //insertar coeficiente y exponente;
-                    F1.MostrarForma();
+               case 1:
+                    System.out.println("\nIngrese el coeficiente: ");
+                    int coe = sc.nextInt(); //leer un entero
+                    System.out.println("Ingrese el exponente: ");
+                    int exp = sc.nextInt();
+                    F1.Insertar(coe, exp);
+                    System.out.println("El termino quedo insertado");
                     break;
                 case 2:
-
+                    System.out.println("\n Ingrese el exponente que desea eliminar: ");
+                    int exp1 = sc.nextInt();
+                    F1.Eliminar(exp1);
                     break;
                 case 3:
-
+                    System.out.println("El polinomio es: \n");
+                    F1.MostrarForma();
                     break;
                 case 4:
+                    System.out.println("\nEl vector reconstruido es: ");
+                    F1.ReconstruirPoli();
                     break;
                 case 5:
                     Forma1.SumarPoli(F1,F12);
@@ -69,14 +80,6 @@ public class Polinomios {
                 + "1. Mostar\n" + "2. Insertar\n" + "3. Sumar\n" + "4. Multiplicar\n" + "5. Salir"));
         return opc;
     }
-
-    public static int NumeroTerminos(String Vs[]) {
-        int cont = 0;
-        //Ciclo para contar
-
-        return cont;
-    }
-
     public static String[] CrearPoli() {
         String cadena = JOptionPane.showInputDialog("ingrese el polinomio");
         char vc[] = cadena.toCharArray();
@@ -116,7 +119,9 @@ public class Polinomios {
                     }
                 } else {
                     if (vc[i] != '^') {
-                        vs[j + 1] = "1";
+                        if (j + 1 < vs.length) {
+                            vs[j + 1] = "1";
+                        }
                     } else {
                         vs[j] = Character.toString(vc[i + 1]);
                         j++;
