@@ -46,8 +46,16 @@ public class Polinomios {
                     break;
                 case 5:
                     Forma1.SumarPoli(F1,F12);
-                    
                     break;
+                case 6:
+                    Forma1.MultiplicarPoli(F1, F12);
+                    break;
+                case 7:
+                    double x=0;
+                    x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
+                    double resultado = F1.evaluar(x);
+                    System.out.print("El resultado del polinomio cuando x =" +x+" es igual a: "+resultado);
+                    break; 
                 default:
                     System.out.println("");
 
