@@ -86,6 +86,9 @@ public class Polinomios {
                 case 12: 
                     Forma2.SumarPoliF2(F2, F2);
                     break;
+                case 13:
+                    Forma2.MultiplicarPoliF2(F2, F2);
+                    break;
                 default:
                     System.out.println("");
 

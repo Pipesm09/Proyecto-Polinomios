@@ -99,10 +99,10 @@ public class Forma2 {
             va[i] = VPF2[i];
         }
         va[posicion] = coe;
-        va[posicion      + 1] = exp;
+        va[posicion       + 1] = exp;
         //se llena lo que quedo a la derecha
         for (int i = posicion; i < terminos * 2 + 1; i++) {
-            va[i    + 2] = VPF2[i];
+            va[i     + 2] = VPF2[i];
         }
         VPF2 = va;
     }
@@ -149,7 +149,7 @@ public class Forma2 {
         }
         //salto al termino que quiero eliminar y tiro lo que este a la derecha de el hacia atras
         for (int i = pos + 2; i < terminos * 2 + 1; i++) {
-            va[i    - 2] = VPF2[i];
+            va[i     - 2] = VPF2[i];
         }
         VPF2 = va;
         System.out.println("Término eliminado melo.");
@@ -173,6 +173,34 @@ public class Forma2 {
             System.out.print("[" + VecSuma.VPF2[i] + "]");
         }
 
+        System.out.println("\n");
+    }
+
+    public static void MultiplicarPoliF2(Forma2 vector1, Forma2 vector2) {
+
+        int Terminos = vector1.VPF2[0] * vector2.VPF2[0];
+        Forma2 VecRes = new Forma2(Terminos);
+
+        for (int i = 1; i < vector1.VPF2.length; i+=2) {
+
+            int coef1 = vector1.VPF2[i];
+            int exp1 = vector1.VPF2[i+1];
+
+            for (int j = 1; j < vector2.VPF2.length; j+=2) {
+
+                int coef2 = vector2.VPF2[j];
+                int exp2 = vector2.VPF2[j+1];
+
+                int coefRes = coef1 * coef2;
+                int expRes = exp1 + exp2;
+
+                VecRes.InsertarF2(coefRes, expRes);
+            }
+        }
+        System.out.println("\n");
+        for (int i = 0; i < VecRes.VPF2.length; i++) {
+            System.out.print("[" + VecRes.VPF2[i] + "]");
+        }
         System.out.println("\n");
     }
 }
