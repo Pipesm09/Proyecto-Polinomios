@@ -10,11 +10,11 @@ public class Forma2 {
     private int du;
 
     public Forma2(int terminos) {
-        this.du = terminos*2;
+        this.du = terminos * 2;
         this.VPF2 = new int[du + 1];
         VPF2[0] = 0;
     }
- 
+
     public int[] getVPF2() {
         return VPF2;
     }
@@ -99,10 +99,10 @@ public class Forma2 {
             va[i] = VPF2[i];
         }
         va[posicion] = coe;
-        va[posicion   + 1] = exp;
+        va[posicion      + 1] = exp;
         //se llena lo que quedo a la derecha
         for (int i = posicion; i < terminos * 2 + 1; i++) {
-            va[i + 2] = VPF2[i];
+            va[i    + 2] = VPF2[i];
         }
         VPF2 = va;
     }
@@ -120,11 +120,10 @@ public class Forma2 {
     }
 
     public void EliminarF2(int exp) {
-        
-       if (VPF2 == null || VPF2[0] == 0) 
-       {
-           System.out.println("Erorr");
-       }
+
+        if (VPF2 == null || VPF2[0] == 0) {
+            System.out.println("Erorr");
+        }
         int pos = 1;
         int terminos = VPF2[0];
         //se busca la posicion a eliminar
@@ -132,7 +131,7 @@ public class Forma2 {
             pos += 2;
         }
         //no se encontro
-        if (pos >= terminos*2+1) {
+        if (pos >= terminos * 2 + 1) {
             System.out.println("erorr");;
             return;
         }
@@ -150,9 +149,30 @@ public class Forma2 {
         }
         //salto al termino que quiero eliminar y tiro lo que este a la derecha de el hacia atras
         for (int i = pos + 2; i < terminos * 2 + 1; i++) {
-            va[i - 2] = VPF2[i];
+            va[i    - 2] = VPF2[i];
         }
         VPF2 = va;
-         System.out.println("Término eliminado melo.");
+        System.out.println("Término eliminado melo.");
+    }
+
+    public static void SumarPoliF2(Forma2 vector1, Forma2 vector2) {
+
+        Forma2 VecSuma = new Forma2(vector1.VPF2[0] + vector2.VPF2[0]);
+
+        for (int i = 1; i < vector1.VPF2[0] * 2 + 1; i += 2) {
+            VecSuma.InsertarF2(vector1.VPF2[i], vector1.VPF2[i + 1]);
+        }
+
+        for (int i = 1; i < vector2.VPF2[0] * 2 + 1; i += 2) {
+            VecSuma.InsertarF2(vector2.VPF2[i], vector2.VPF2[i + 1]);
+        }
+
+        System.out.println("\nLa suma de los polinomios es:\n");
+
+        for (int i = 0; i < VecSuma.VPF2.length; i++) {
+            System.out.print("[" + VecSuma.VPF2[i] + "]");
+        }
+
+        System.out.println("\n");
     }
 }

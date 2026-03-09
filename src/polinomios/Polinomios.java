@@ -19,13 +19,13 @@ public class Polinomios {
         String vs[] = CrearPoli();
         F1 = new Forma1(Integer.parseInt(vs[1]));
         F1.LlenarPoli(vs);
-        String vs1[] = CrearPoli();
-        Forma1 F12 = new Forma1(Integer.parseInt(vs1[1]));
-        F12.LlenarPoli(vs1);
+        Forma1 F12 = new Forma1(Integer.parseInt(vs[1]));
+        F12.LlenarPoli(vs);
         Forma2 F2;
         int terminos = vs.length / 2;
         F2 = new Forma2(terminos);
         F2.LlenarPoli2(vs);
+        
         do {
             opt = menu();
             switch (opt) {
@@ -82,6 +82,9 @@ public class Polinomios {
                 case 11:
                     System.out.println("\nEl vector reconstruido es: ");
                     F1.ReconstruirPoli();
+                    break;
+                case 12: 
+                    Forma2.SumarPoliF2(F2, F2);
                     break;
                 default:
                     System.out.println("");
