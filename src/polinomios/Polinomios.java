@@ -83,7 +83,6 @@ public class Polinomios {
                     System.out.println("\nEl vector reconstruido es: ");
                     F1.ReconstruirPoli();
                     break;
-                case 10:
                 default:
                     System.out.println("");
 
