@@ -57,10 +57,10 @@ public class Polinomios {
                     Forma1.MultiplicarPoli(F1, F12);
                     break;
                 case 7:
-                    double x = 0;
+                    double x;
                     x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
                     double resultado = F1.evaluar(x);
-                    System.out.print("El resultado del polinomio cuando x =" + x + " es igual a: " + resultado);
+                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado+"\n");
                     break;
                 case 8:
                     System.out.println("\nIngrese el coeficiente: ");
@@ -88,6 +88,11 @@ public class Polinomios {
                     break;
                 case 13:
                     Forma2.MultiplicarPoliF2(F2, F2);
+                    break;
+                case 14:
+                    x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
+                    resultado = F1.evaluar(x);
+                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado+"\n");
                     break;
                 default:
                     System.out.println("");

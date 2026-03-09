@@ -203,4 +203,19 @@ public class Forma2 {
         }
         System.out.println("\n");
     }
+    
+    public double evaluarF2(double x) {
+
+        double resultado = 0;
+
+        for (int i = 1; i < VPF2.length; i+=2) {
+
+            int coef = VPF2[i];
+            int exp = VPF2[i+1];
+
+            resultado += coef * Math.pow(x, exp);
+        }
+
+        return resultado;
+    }
 }
