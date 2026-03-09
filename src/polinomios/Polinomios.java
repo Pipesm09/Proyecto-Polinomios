@@ -20,21 +20,16 @@ public class Polinomios {
         F1 = new Forma1(Integer.parseInt(vs[1]));
         F1.LlenarPoli(vs);
         String vs1[] = CrearPoli();
-        Forma1 F12 = new Forma1 (Integer.parseInt(vs1[1]));
+        Forma1 F12 = new Forma1(Integer.parseInt(vs1[1]));
         F12.LlenarPoli(vs1);
-        
-
-
-        /**
-         * Forma2 F2 = new Forma2(NumeroTerminos())
-         *
-         * Forma3 F3 = new Forma3(Pene);
-         *
-         */
+        Forma2 F2;
+        int terminos = vs.length / 2;
+        F2 = new Forma2(terminos);
+        F2.LlenarPoli2(vs);
         do {
             opt = menu();
             switch (opt) {
-               case 1:
+                case 1:
                     System.out.println("\nIngrese el coeficiente: ");
                     int coe = sc.nextInt(); //leer un entero
                     System.out.println("Ingrese el exponente: ");
@@ -56,17 +51,39 @@ public class Polinomios {
                     F1.ReconstruirPoli();
                     break;
                 case 5:
-                    Forma1.SumarPoli(F1,F12);
+                    Forma1.SumarPoli(F1, F12);
                     break;
                 case 6:
                     Forma1.MultiplicarPoli(F1, F12);
                     break;
                 case 7:
-                    double x=0;
+                    double x = 0;
                     x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
                     double resultado = F1.evaluar(x);
-                    System.out.print("El resultado del polinomio cuando x =" +x+" es igual a: "+resultado);
-                    break; 
+                    System.out.print("El resultado del polinomio cuando x =" + x + " es igual a: " + resultado);
+                    break;
+                case 8:
+                    System.out.println("\nIngrese el coeficiente: ");
+                    int coe2 = sc.nextInt(); //leer un entero
+                    System.out.println("Ingrese el exponente: ");
+                    int exp2 = sc.nextInt();
+                    F2.InsertarF2(coe2, exp2);
+                    System.out.println("El termino quedo insertado");
+                    break;
+                case 9:
+                    System.out.println("\n Ingrese el exponente que desea eliminar: ");
+                    int exp3 = sc.nextInt();
+                    F2.EliminarF2(exp3);
+                    break;
+                case 10:
+                    System.out.println("El polinomio es: \n");
+                    F2.MostrarForma2();
+                    break;
+                case 11:
+                    System.out.println("\nEl vector reconstruido es: ");
+                    F1.ReconstruirPoli();
+                    break;
+                case 10:
                 default:
                     System.out.println("");
 
@@ -80,6 +97,7 @@ public class Polinomios {
                 + "1. Mostar\n" + "2. Insertar\n" + "3. Sumar\n" + "4. Multiplicar\n" + "5. Salir"));
         return opc;
     }
+
     public static String[] CrearPoli() {
         String cadena = JOptionPane.showInputDialog("ingrese el polinomio");
         char vc[] = cadena.toCharArray();
@@ -101,7 +119,7 @@ public class Polinomios {
                 } else {
                 }
             } else {
-                
+
                 if (vc[i] == 'x') {
                     if (s.equals("") || s.equals("+")) {
                         vs[j] = "1";
@@ -114,7 +132,7 @@ public class Polinomios {
                     s = "";
                     if (i + 1 < vc.length && vc[i + 1] == '^') {
                     } else {
-                        vs[j]="1";
+                        vs[j] = "1";
                         j++;
                     }
                 } else {
@@ -142,9 +160,9 @@ public class Polinomios {
         //ordenar vector
         String Acoe;
         String AExp;
-        boolean Cambio=true;
-        while(Cambio){
-            Cambio=false;
+        boolean Cambio = true;
+        while (Cambio) {
+            Cambio = false;
             for (i = 1; i < vs.length; i += 2) {
                 j = i + 2;
                 if (vs[i] != null && vs[j] != null) {
@@ -155,7 +173,7 @@ public class Polinomios {
                         vs[i] = vs[j];
                         vs[j - 1] = Acoe;
                         vs[j] = AExp;
-                        Cambio=true;
+                        Cambio = true;
                     }
                 }
             }

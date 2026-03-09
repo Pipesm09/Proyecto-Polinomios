@@ -6,14 +6,21 @@ package polinomios;
 
 public class Forma2 {
 
-    //Atributos
-    private int du, VPF2[];
-    //Metodos
+    private int VPF2[];
+    private int du;
 
-    public Forma2(int Terminos) {
-        this.du = Terminos * 2;
+    public Forma2(int terminos) {
+        this.du = terminos*2;
         this.VPF2 = new int[du + 1];
-        VPF2[0] = Terminos;
+        VPF2[0] = 0;
+    }
+ 
+    public int[] getVPF2() {
+        return VPF2;
+    }
+
+    public void setVPF2(int[] VPF2) {
+        this.VPF2 = VPF2;
     }
 
     public int getDu() {
@@ -24,14 +31,6 @@ public class Forma2 {
         this.du = du;
     }
 
-    public int[] getVPF2() {
-        return VPF2;
-    }
-
-    public void setVPF2(int[] VPF2) {
-        this.VPF2 = VPF2;
-    }
-
     public int getVPF2(int i) {
         return VPF2[i];
     }
@@ -39,7 +38,9 @@ public class Forma2 {
     public void setVPF2(int d, int i) {
         this.VPF2[i] = d;
     }
+
     public void LlenarPoli2(String[] Vs) {
+        //esto garantiza que se lea todas las pajeras
         for (int i = 0; i < Vs.length - 1; i += 2) {
             if (Vs[i] == null || Vs[i + 1] == null) {
                 break;
@@ -80,23 +81,28 @@ public class Forma2 {
         int terminos = VPF2[0];
         int posicion = 1;
         //quiere decir que va a romper si el termino a insertar no tiene exponente igual en el polinomio
-        while (posicion < du + 1 && VPF2[posicion + 1] > exp) {
+        while (posicion < terminos * 2 + 1 && VPF2[posicion + 1] > exp) {
             posicion += 2;
         }
-        if (posicion < du + 1 && VPF2[posicion + 1] == exp) {
+        if (posicion < terminos * 2 + 1 && VPF2[posicion + 1] == exp) {
             VPF2[posicion] = VPF2[posicion] + coe;
+            if (VPF2[posicion] == 0) {
+                EliminarF2(exp);
+            }
+            return;
         }
-        int[] va=  new int[du + 3];
+
+        int[] va=  new int[(terminos + 1) * 2 + 1];
         va[0] = terminos + 1;
         //la idea es recorrer hasta posicion, para luego mandar a los que estaban ahi mas atras en el vector Va
-        for (int i = 0; i < posicion; i++) {
+        for (int i = 1; i < posicion; i++) {
             va[i] = VPF2[i];
         }
         va[posicion] = coe;
         va[posicion   + 1] = exp;
         //se llena lo que quedo a la derecha
-        for (int i = posicion; i < du + 1; i++) {
-            va[i] = VPF2[i];
+        for (int i = posicion; i < terminos * 2 + 1; i++) {
+            va[i + 2] = VPF2[i];
         }
         VPF2 = va;
     }
@@ -111,5 +117,42 @@ public class Forma2 {
             System.out.print("[" + VPF2[i] + "][" + VPF2[i + 1] + "] ");
         }
         System.out.println();
+    }
+
+    public void EliminarF2(int exp) {
+        
+       if (VPF2 == null || VPF2[0] == 0) 
+       {
+           System.out.println("Erorr");
+       }
+        int pos = 1;
+        int terminos = VPF2[0];
+        //se busca la posicion a eliminar
+        while (pos < terminos * 2 + 1 && VPF2[pos + 1] != exp) {
+            pos += 2;
+        }
+        //no se encontro
+        if (pos >= terminos*2+1) {
+            System.out.println("erorr");;
+            return;
+        }
+        //por si solo hay un termino
+        if (terminos == 1) {
+            VPF2 = null;
+            return;
+        }
+        //creo vector mas pequeño
+        int[] va=  new int[(terminos - 1) * 2 + 1];
+        va[0] = terminos - 1;
+        //gguardar hasta el temrino a eliminar
+        for (int i = 1; i < pos; i++) {
+            va[i] = VPF2[i];
+        }
+        //salto al termino que quiero eliminar y tiro lo que este a la derecha de el hacia atras
+        for (int i = pos + 2; i < terminos * 2 + 1; i++) {
+            va[i - 2] = VPF2[i];
+        }
+        VPF2 = va;
+         System.out.println("Término eliminado melo.");
     }
 }
