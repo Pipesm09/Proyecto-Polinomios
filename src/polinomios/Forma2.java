@@ -218,4 +218,42 @@ public class Forma2 {
 
         return resultado;
     }
+    public String ReconstruirPoliF2() {
+        if (VPF2 == null) return "El vector es NULO (vacío)";
+
+        int terminos = VPF2[0];        
+        String resultado = "";
+        boolean esPrimerTermino = true;
+        for (int i =1 ; i <terminos*2+1; i+=2) {
+            int exp = VPF2[i+1];
+            int coe= VPF2[i];
+            if (coe != 0) {
+                if (esPrimerTermino) {
+                    if (coe < 0) resultado += "-";
+                } else {
+                    if (coe > 0) resultado += " + ";
+                    else resultado += " - ";
+                }
+                int valor =coe;
+                if(valor<0){
+                    valor=-valor;
+                }
+                if (valor !=1 || exp == 0) {
+                    resultado += valor;
+                }
+                if (exp > 0) {
+                    resultado += "x";
+                }
+                if (exp > 1) {
+                    resultado += "^" + exp;
+                }
+                esPrimerTermino = false;
+            }
+        }
+
+        System.out.println(resultado);
+        
+        if (resultado.equals("")) return "0";
+        return resultado;
+    }
 }

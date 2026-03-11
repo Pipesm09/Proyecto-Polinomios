@@ -25,7 +25,8 @@ public class Polinomios {
         int terminos = vs.length / 2;
         F2 = new Forma2(terminos);
         F2.LlenarPoli2(vs);
-        
+        Forma3 F3 = new Forma3();
+        F3.LlenarPoliF3(vs);
         do {
             opt = menu();
             switch (opt) {
@@ -60,7 +61,7 @@ public class Polinomios {
                     double x;
                     x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
                     double resultado = F1.evaluar(x);
-                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado+"\n");
+                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado + "\n");
                     break;
                 case 8:
                     System.out.println("\nIngrese el coeficiente: ");
@@ -83,7 +84,7 @@ public class Polinomios {
                     System.out.println("\nEl vector reconstruido es: ");
                     F1.ReconstruirPoli();
                     break;
-                case 12: 
+                case 12:
                     Forma2.SumarPoliF2(F2, F2);
                     break;
                 case 13:
@@ -92,7 +93,27 @@ public class Polinomios {
                 case 14:
                     x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
                     resultado = F1.evaluar(x);
-                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado+"\n");
+                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado + "\n");
+                    break;
+                case 15:
+                    System.out.println("\nIngrese el coeficiente: ");
+                    int coe3 = sc.nextInt(); //leer un entero
+                    System.out.println("Ingrese el exponente: ");
+                    int exp4 = sc.nextInt();
+                    F3.InsertarF3(coe3, exp4);
+                    System.out.println("El termino quedo insertado");
+                    break;
+                case 16:
+                    System.out.println("\n Ingrese el exponente que desea eliminar: ");
+                    int exp7 = sc.nextInt();
+                    F3.EliminarF3(exp7);
+                case 17:
+                    System.out.println("El polinomio es: \n");
+                    F3.MostrarForma3();
+                    break;
+                case 18:
+                    System.out.println("\nEl vector reconstruido es: ");
+                    F3.ReconstruirPoliF3();
                     break;
                 default:
                     System.out.println("");
@@ -104,7 +125,9 @@ public class Polinomios {
     public static int menu() {
 
         int opc = Integer.parseInt(JOptionPane.showInputDialog("****Menu pricipal****\n"
-                + "1. Mostar\n" + "2. Insertar\n" + "3. Sumar\n" + "4. Multiplicar\n" + "5. Salir"));
+                + "1. Mostar\n" + "2. Insertar\n" + "3. Sumar\n" + "4. Multiplicar\n" + "5. Salir"
+                +"\n15. Insertar en cualquier posicion de la lista\n" + "16. Eliminar en cualquier posicion de la lista\n" 
+                + "17. Mostra forma 3\n" + "18. Reconstruir de forma 2\n"));
         return opc;
     }
 
