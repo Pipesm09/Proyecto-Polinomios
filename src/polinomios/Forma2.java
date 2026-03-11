@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package polinomios;
 
 public class Forma2 {
@@ -99,10 +95,10 @@ public class Forma2 {
             va[i] = VPF2[i];
         }
         va[posicion] = coe;
-        va[posicion       + 1] = exp;
+        va[posicion         + 1] = exp;
         //se llena lo que quedo a la derecha
         for (int i = posicion; i < terminos * 2 + 1; i++) {
-            va[i     + 2] = VPF2[i];
+            va[i       + 2] = VPF2[i];
         }
         VPF2 = va;
     }
@@ -149,7 +145,7 @@ public class Forma2 {
         }
         //salto al termino que quiero eliminar y tiro lo que este a la derecha de el hacia atras
         for (int i = pos + 2; i < terminos * 2 + 1; i++) {
-            va[i     - 2] = VPF2[i];
+            va[i       - 2] = VPF2[i];
         }
         VPF2 = va;
         System.out.println("Término eliminado melo.");
@@ -181,15 +177,15 @@ public class Forma2 {
         int Terminos = vector1.VPF2[0] * vector2.VPF2[0];
         Forma2 VecRes = new Forma2(Terminos);
 
-        for (int i = 1; i < vector1.VPF2.length; i+=2) {
+        for (int i = 1; i < vector1.VPF2.length; i += 2) {
 
             int coef1 = vector1.VPF2[i];
-            int exp1 = vector1.VPF2[i+1];
+            int exp1 = vector1.VPF2[i + 1];
 
-            for (int j = 1; j < vector2.VPF2.length; j+=2) {
+            for (int j = 1; j < vector2.VPF2.length; j += 2) {
 
                 int coef2 = vector2.VPF2[j];
-                int exp2 = vector2.VPF2[j+1];
+                int exp2 = vector2.VPF2[j + 1];
 
                 int coefRes = coef1 * coef2;
                 int expRes = exp1 + exp2;
@@ -203,43 +199,50 @@ public class Forma2 {
         }
         System.out.println("\n");
     }
-    
+
     public double evaluarF2(double x) {
 
         double resultado = 0;
 
-        for (int i = 1; i < VPF2.length; i+=2) {
+        for (int i = 1; i < VPF2.length; i += 2) {
 
             int coef = VPF2[i];
-            int exp = VPF2[i+1];
+            int exp = VPF2[i + 1];
 
             resultado += coef * Math.pow(x, exp);
         }
 
         return resultado;
     }
-    
-    public String ReconstruirPoliF2() {
-        if (VPF2 == null) return "El vector es NULO (vacío)";
 
-        int terminos = VPF2[0];        
+    public String ReconstruirPoliF2() {
+        if (VPF2 == null) {
+            return "El vector es NULO (vacío)";
+        }
+
+        int terminos = VPF2[0];
         String resultado = "";
         boolean esPrimerTermino = true;
-        for (int i =1 ; i <terminos*2+1; i+=2) {
-            int exp = VPF2[i+1];
-            int coe= VPF2[i];
+        for (int i = 1; i < terminos * 2 + 1; i += 2) {
+            int exp = VPF2[i + 1];
+            int coe = VPF2[i];
             if (coe != 0) {
                 if (esPrimerTermino) {
-                    if (coe < 0) resultado += "-";
+                    if (coe < 0) {
+                        resultado += "-";
+                    }
                 } else {
-                    if (coe > 0) resultado += " + ";
-                    else resultado += " - ";
+                    if (coe > 0) {
+                        resultado += " + ";
+                    } else {
+                        resultado += " - ";
+                    }
                 }
-                int valor =coe;
-                if(valor<0){
-                    valor=-valor;
+                int valor = coe;
+                if (valor < 0) {
+                    valor = -valor;
                 }
-                if (valor !=1 || exp == 0) {
+                if (valor != 1 || exp == 0) {
                     resultado += valor;
                 }
                 if (exp > 0) {
@@ -253,8 +256,36 @@ public class Forma2 {
         }
 
         System.out.println(resultado);
-        
-        if (resultado.equals("")) return "0";
+
+        if (resultado.equals("")) {
+            return "0";
+        }
         return resultado;
+    }
+
+    public static void MultiplicarF3F1aF2(Forma3 vector1, Forma1 vector2) {
+        Nodo p = vector1.getPunta();
+        int Terminos = p.getExp() + vector2.getVPF1(0);
+        Forma2 VecRes = new Forma2(Terminos);
+
+        while (p != null) {
+            for (int i = 1; i < vector2.getVPF1().length; i++) {
+                int Coe1 = vector2.getVPF1(i);
+                int Exp1 = vector2.getDu() - i;
+
+                int Coe = p.getCoe() * Coe1;
+                int Exp = p.getExp() + Exp1;
+
+                if (Coe != 0) {
+                    VecRes.InsertarF2(Coe, Exp);
+                }
+            }
+            p = p.getLiga();
+        }
+        System.out.println("\n");
+        for (int i = 0; i < VecRes.VPF2.length; i++) {
+            System.out.print("[" + VecRes.VPF2[i] + "]");
+        }
+        System.out.println("\n");
     }
 }

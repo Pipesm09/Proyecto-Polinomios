@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Andres Sossa, Juan Felipzzz sanchez
+ * @author Andres Sossa, Juan Felipe sanchez
  */
 public class Polinomios {
 
@@ -27,8 +27,6 @@ public class Polinomios {
         F2.LlenarPoli2(vs);
         Forma3 F3 = new Forma3();
         F3.LlenarPoliF3(vs);
-        Forma3 F32 = new Forma3();
-        F32.LlenarPoliF3(vs);
         do {
             opt = menu();
             switch (opt) {
@@ -118,15 +116,21 @@ public class Polinomios {
                     F3.ReconstruirPoliF3();
                     break;
                 case 19:
-                    Forma3.SumarPoliF3(F3, F32);
+                    Forma3.SumarPoliF3(F3, F3);
                     break;
                 case 20:
-                    Forma3.MultiplicarPoliF3(F3, F32);
+                    Forma3.MultiplicarPoliF3(F3, F3);
                     break;
                 case 21:
                     x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
                     resultado = F3.evaluarF3(x);
                     System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado + "\n");
+                    break;
+                case 22:
+                    Forma1.SumarF2F3aF1(F2, F3);
+                    break;
+                case 23: 
+                    Forma2.MultiplicarF3F1aF2(F3, F1);
                     break;
                 default:
                     System.out.println("");
@@ -140,9 +144,10 @@ public class Polinomios {
         int opc = Integer.parseInt(JOptionPane.showInputDialog("****Menu pricipal****\n"
                 + "1. Insertar Forma 1\n" + "2. Eliminar Forma 1\n" + "3. Mostrar Forma 1\n" + "4. Reconstruir Forma 1\n" + "5. Sumar Forma 1"
                 + "8. Insertar en forma 2 \n" + "9. Eliminar en forma 2 \n" + "10. Mostra forma 2 \n" + "11. Reconstruir de forma 2 \n"
-                + "12. Sumar Forma 2\n" + "13. Multiplicar forma 2\n"+ "14. Evaluar forma 2\n" +"\n15. Insertar en cualquier posicion de la lista\n"
-                 + "16. Eliminar en cualquier posicion de la lista\n" + "17. Mostra forma 3\n" + "18. Reconstruir de forma 3\n"
-                  + "19. Sumar forma 3\n" + "20. Multiplicar forma 3\n"));
+                + "12. Sumar Forma 2\n" + "13. Multiplicar forma 2\n"+ "14. Evaluar forma 2\n" +"15. Insertar en cualquier posicion de la lista\n"
+                + "16. Eliminar en cualquier posicion de la lista\n" + "17. Mostra forma 3\n" + "18. Reconstruir de forma 3\n"
+                + "19. Sumar forma 3\n" + "20. Multiplicar forma 3\n" + "21. Evaluar Forma 3\n" + "22. Sumar forma 2 con forma 3 en forma 1\n"
+                + "23. Multiplicar forma 3 con forma 1 en forma 2\n"));
         return opc;
     }
 

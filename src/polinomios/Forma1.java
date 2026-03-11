@@ -2,7 +2,7 @@ package polinomios;
 
 /**
  *
- * @author Andres Sossa, Juan Felipene Sanchezzzzzzzz
+ * @author Andres Sossa, Juan Felipe Sanchez
  */
 public class Forma1 {
 
@@ -29,6 +29,10 @@ public class Forma1 {
 
     public int getVPF1(int i) {
         return VPF1[i];
+    }
+    
+    public int[] getVPF1() {
+        return VPF1;
     }
 
     public void setVPF1(int d, int i) {
@@ -115,34 +119,42 @@ public class Forma1 {
         }
 
     }
-    public String ReconstruirPoli() {
-        if (VPF1 == null) return "El vector es NULO (vacío)";
 
-        int grado = VPF1[0];        
+    public String ReconstruirPoli() {
+        if (VPF1 == null) {
+            return "El vector es NULO (vacío)";
+        }
+
+        int grado = VPF1[0];
         String resultado = "";
         boolean esPrimerTermino = true;
         for (int k = grado; k >= 0; k--) {
             int pos = k + 1;
-            
+
             // Si la posición se sale del vector, avisamos
             if (pos >= VPF1.length) {
                 System.out.println("SALTANDO pos " + pos + " (fuera de rango)");
-                continue; 
+                continue;
             }
 
             int coe = VPF1[pos];
             if (coe != 0) {
                 if (esPrimerTermino) {
-                    if (coe < 0) resultado += "-";
+                    if (coe < 0) {
+                        resultado += "-";
+                    }
                 } else {
-                    if (coe > 0) resultado += " + ";
-                    else resultado += " - ";
+                    if (coe > 0) {
+                        resultado += " + ";
+                    } else {
+                        resultado += " - ";
+                    }
                 }
-                int valor =coe;
-                if(valor<0){
-                    valor=-valor;
+                int valor = coe;
+                if (valor < 0) {
+                    valor = -valor;
                 }
-                if (valor !=1 || k == 0) {
+                if (valor != 1 || k == 0) {
                     resultado += valor;
                 }
                 if (k > 0) {
@@ -156,8 +168,10 @@ public class Forma1 {
         }
 
         System.out.println(resultado);
-        
-        if (resultado.equals("")) return "0";
+
+        if (resultado.equals("")) {
+            return "0";
+        }
         return resultado;
     }
 
@@ -244,5 +258,73 @@ public class Forma1 {
         }
 
         return resultado;
+    }
+
+    public static void SumarF2F3aF1(Forma2 vector1, Forma3 vector2) {
+
+        int gradoSuma;
+        int Coe;
+        int Exp;
+
+        Nodo p = vector2.getPunta();
+
+        if (vector1.getVPF2(2) > p.getExp()) {
+            gradoSuma = vector1.getVPF2(2);
+        } else {
+            gradoSuma = p.getExp();
+        }
+
+        Forma1 VecSuma = new Forma1(gradoSuma);
+
+        for (int i = 2; i < vector1.getVPF2().length; i += 2) {
+
+            // Si la lista ya se terminó
+            if (p == null) {
+                Coe = vector1.getVPF2(i - 1);
+                Exp = vector1.getVPF2(i);
+                VecSuma.Insertar(Coe, Exp);
+                continue;
+            }
+
+            // Exponentes iguales
+            if (vector1.getVPF2(i) == p.getExp()) {
+
+                Coe = vector1.getVPF2(i - 1) + p.getCoe();
+                Exp = vector1.getVPF2(i);
+
+                VecSuma.Insertar(Coe, Exp);
+                p = p.getLiga();
+            } // Exponente mayor en Forma2
+            else if (vector1.getVPF2(i) > p.getExp()) {
+
+                Coe = vector1.getVPF2(i - 1);
+                Exp = vector1.getVPF2(i);
+
+                VecSuma.Insertar(Coe, Exp);
+            } // Exponente mayor en Forma3
+            else {
+
+                Coe = p.getCoe();
+                Exp = p.getExp();
+
+                VecSuma.Insertar(Coe, Exp);
+                p = p.getLiga();
+
+                i -= 2; // repetir el mismo término del vector
+            }
+        }
+
+        // Guardar los términos restantes de la lista
+        while (p != null) {
+            Coe = p.getCoe();
+            Exp = p.getExp();
+            VecSuma.Insertar(Coe, Exp);
+            p = p.getLiga();
+        }
+        System.out.println("\n");
+        for (int i = 0; i < VecSuma.VPF1.length; i++) {
+            System.out.print("[" + VecSuma.VPF1[i] + "]");
+        }
+        System.out.println("\n");
     }
 }
