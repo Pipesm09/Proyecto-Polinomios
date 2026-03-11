@@ -126,6 +126,7 @@ public class Polinomios {
 
         int opc = Integer.parseInt(JOptionPane.showInputDialog("****Menu pricipal****\n"
                 + "1. Mostar\n" + "2. Insertar\n" + "3. Sumar\n" + "4. Multiplicar\n" + "5. Salir"
+                + "8. Insertar en forma 2 \n" + "9. Eliminar en forma 2 \n" + "10. Mostra forma 2 \n" + "11. Reconstruir de forma 2 \n"
                 +"\n15. Insertar en cualquier posicion de la lista\n" + "16. Eliminar en cualquier posicion de la lista\n" 
                 + "17. Mostra forma 3\n" + "18. Reconstruir de forma 2\n"));
         return opc;
