@@ -218,6 +218,7 @@ public class Forma2 {
 
         return resultado;
     }
+    
     public String ReconstruirPoliF2() {
         if (VPF2 == null) return "El vector es NULO (vacío)";
 

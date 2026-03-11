@@ -27,6 +27,8 @@ public class Polinomios {
         F2.LlenarPoli2(vs);
         Forma3 F3 = new Forma3();
         F3.LlenarPoliF3(vs);
+        Forma3 F32 = new Forma3();
+        F32.LlenarPoliF3(vs);
         do {
             opt = menu();
             switch (opt) {
@@ -115,6 +117,17 @@ public class Polinomios {
                     System.out.println("\nEl vector reconstruido es: ");
                     F3.ReconstruirPoliF3();
                     break;
+                case 19:
+                    Forma3.SumarPoliF3(F3, F32);
+                    break;
+                case 20:
+                    Forma3.MultiplicarPoliF3(F3, F32);
+                    break;
+                case 21:
+                    x = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el valor de x para evaluar el polinomio"));
+                    resultado = F3.evaluarF3(x);
+                    System.out.print("\nEl resultado del polinomio cuando x =" + x + " es igual a: " + resultado + "\n");
+                    break;
                 default:
                     System.out.println("");
 
@@ -125,10 +138,11 @@ public class Polinomios {
     public static int menu() {
 
         int opc = Integer.parseInt(JOptionPane.showInputDialog("****Menu pricipal****\n"
-                + "1. Mostar\n" + "2. Insertar\n" + "3. Sumar\n" + "4. Multiplicar\n" + "5. Salir"
+                + "1. Insertar Forma 1\n" + "2. Eliminar Forma 1\n" + "3. Mostrar Forma 1\n" + "4. Reconstruir Forma 1\n" + "5. Sumar Forma 1"
                 + "8. Insertar en forma 2 \n" + "9. Eliminar en forma 2 \n" + "10. Mostra forma 2 \n" + "11. Reconstruir de forma 2 \n"
-                +"\n15. Insertar en cualquier posicion de la lista\n" + "16. Eliminar en cualquier posicion de la lista\n" 
-                + "17. Mostra forma 3\n" + "18. Reconstruir de forma 2\n"));
+                + "12. Sumar Forma 2\n" + "13. Multiplicar forma 2\n"+ "14. Evaluar forma 2\n" +"\n15. Insertar en cualquier posicion de la lista\n"
+                 + "16. Eliminar en cualquier posicion de la lista\n" + "17. Mostra forma 3\n" + "18. Reconstruir de forma 3\n"
+                  + "19. Sumar forma 3\n" + "20. Multiplicar forma 3\n"));
         return opc;
     }
 
